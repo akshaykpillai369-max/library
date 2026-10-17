@@ -1,0 +1,38 @@
+{% extends 'books/base.html'%}
+
+{%block content%}
+ <div class="card mb-3 m-5">
+  <img class="card-img-top p-3" src="{{book.image}}" alt="Card image cap" style="height: 300px; object-fit: contain;">
+  <div class="card-body">
+    <h5 class="card-title">{{book.title}}</h5>
+    <p class="card-text">Author : {{book.author}}.</p>
+    <p class="card-text">Description : {{book.description}}</p>
+    {% if book.status|capfirst == 'Reading' %}
+        <strong style="color: rgb(244, 244, 0);">Status : {{book.status}}</strong>
+        {% elif book.status|capfirst == 'To Read'%}
+        <strong style="color: red;">Status : {{book.status}}</strong>
+        {% elif book.status|capfirst == 'Completed'%}
+        <strong style="color: green;">Status : {{book.status}}</strong>
+        {% else %}
+        <strong style="color: red;">please add a valid status (To Read, Completed, Reading)</strong>
+        {% endif %}
+    <p class="card-text pt-2">Rating : {{book.rating}}</p >
+    <p class="card-text">Added By : {{book.added_by.username}}</p>
+  </div>
+</div>
+
+{%endblock content%}
+
+{% block buttons %}
+<div class="m-5 mt-2">
+     {% if book.added_by == request.user %}
+
+            <a href="{% url 'books:delete_book' book.id %}" class="btn btn-danger m-3">Delete</a>
+            <a href="{% url 'books:update_book' book.id %}" class="btn btn-warning m-3">Update</a>
+
+        {% endif %}
+        
+
+</div>
+
+{% endblock buttons %}
