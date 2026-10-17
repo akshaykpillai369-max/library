@@ -1,0 +1,58 @@
+{% extends 'books/base.html' %}
+
+{% block content %}
+
+<div style="color: green;">
+      {%if messages %}
+          {% for message in messages %}
+               {{message}}
+          {% endfor%} 
+      {% endif %}
+
+</div>
+
+ <center><h1> <u> The Books That Are Available </u> </h1> </center>
+<a href="{% url 'books:add_book' %}" class="btn btn-success m-3">Add a new Book</a>
+
+<!-- 1. The ROW stays OUTSIDE the loop -->
+<div class="row g-3 p-4">
+    {% for book in page_obj %}
+        <div class="col-12 col-md-6 col-lg-3 d-flex align-items-stretch">
+            <div class="card w-100 h-100 shadow-sm">
+                <!-- 1. Fixed height image with object-fit -->
+                <img 
+                    class="card-img-bottom pt-3" 
+                    src="{{ book.image }}" 
+                    alt="{{ book.title }}"
+                    style="height: 320px; object-fit: contain;">
+                
+                <!-- 2. Flexbox body to push content -->
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text text-secondary">{{ book.description }}</p>
+                    
+                    <!-- 3. mt-auto pushes the button to the bottom -->
+                    <div class="mt-auto pt-3">
+                        <a href="{{book.id}}" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="d-flex justify-content-center align-items-center gap-1 fw-bold ">
+    {% if page_obj.has_previous %}
+     <a href="?page={{page_obj.previous_page_number}}" class="btn btn-secondary">Previous</a>
+     {% endif %}
+
+    <span style="color: grey;">{{page_obj}}</span>
+
+    {% if page_obj.has_next %}
+     <a href="?page={{page_obj.next_page_number}}" class="btn btn-secondary" >Next</a>
+     {% endif %}
+
+
+    </div>
+    
+</div>
+
+{% endblock content %}
