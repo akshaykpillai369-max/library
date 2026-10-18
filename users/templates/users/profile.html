@@ -1,0 +1,14 @@
+{%extends 'books/base.html'%}
+{%block content%}
+<div class="container mt-5">
+    <img style="height: 40px; width: 40px; border-radius: 50%;" src="{{ profile_user.profile.image.url }}" alt="Profile Picture">
+    <p>Name: {{ profile_user.username }}!</p>
+    <p>Email: {{ profile_user.email }}</p>
+    <p>Joined: {{ profile_user.date_joined|date:"M Y" }}</p>
+    
+    <p>Location: {{profile_user.profile.location }}</p>
+</div>   
+    {%endblock content %}
+
+
+
