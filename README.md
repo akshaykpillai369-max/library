@@ -35,9 +35,13 @@ I able to understand django much more and learned about templates , pillow, auth
 
 That's all hosted this project locally! Open http://127.0.0.1:8000/ in your browser and you can see the project is running
 
+# License
+This project is licensed under the [Akshay] License - see the LICENSE.md file for details
+
 # Credits
 
 Readme Demo by @FaizeenHoque, given to me by Hackclub pixl team
+
 
 
 
